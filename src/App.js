@@ -1,10 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import img_font_sizeUp from "./img/font_sizeUp.png";
-import styledComponents from "styled-components";
+import styled, { css } from "styled-components";
 import { useState } from 'react';
+import Buttons from './components/Buttons';
+import MemoTabs from './components/MemoTabs';
 
-const MemoBox = styledComponents.textarea`
+
+const MemoBox = styled.textarea`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -21,7 +23,8 @@ const MemoBox = styledComponents.textarea`
   border: 0;
   outline: 0;
 
-  font-size: 16px;
+  font-size: ${(props) => props.fontSize || "16px"};
+  ${(props) => props.animationActive && `animation-duration: 1.0s; animation-name: fade`}
 `
 
 function App() {
@@ -31,10 +34,15 @@ function App() {
       <MemoBox 
         defaultValue={localStorage.getItem("memo_content")} 
         onChange={(e)=>{localStorage.setItem("memo_content", e.target.value)}} 
-        placeholder='내용을 입력하세요'/>
-      <div className='buttons'>
-        <button onClick={()=>{console.log("clicked")}} className='font-sizeUp-btn'><img src={img_font_sizeUp}/></button>
-      </div>
+        placeholder='내용을 입력하세요'
+        fontSize={fontSize+"px"}
+        animationActive/>
+
+      <MemoTabs/>
+
+      <Buttons 
+        fontSize={fontSize} 
+        set_fontSize={set_fontSize}/>
     </>
   );
 }
