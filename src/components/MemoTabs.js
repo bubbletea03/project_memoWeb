@@ -9,7 +9,9 @@ const MemoTab = styled.textarea`
   resize: none;
   line-height: 60px;
   
-  margin: 10px auto;
+  display: block;
+  margin-bottom: 15px;
+  margin-right: auto;
   border: 0;
 
   text-align: center;
