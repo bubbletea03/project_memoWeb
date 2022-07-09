@@ -1,23 +1,28 @@
 import styled from "styled-components";
 
 const MemoTab = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 20%;
-  transform: translate(-50%, -50%);
-
-  width: 200px;
-  height: 80px;
-  background-color: green;
+  background-color: ${(props) => props.backgroundColor || "lightgreen"};
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  
+  margin: 10px auto;
 
   text-align: center;
+  font-size: 16px;
+  color: gray;
+
+  animation-name: fade;
+  animation-duration: 1.0s;
 `
 
 function MemoTabs(){
     return (
         <>
-          <MemoTab>탭임</MemoTab>
-          <MemoTab>탭임2</MemoTab>
+          <div className="memoTab-box">
+            <MemoTab>탭임</MemoTab>
+            <MemoTab>탭임2</MemoTab>
+          </div>
         </>
     )
 }
