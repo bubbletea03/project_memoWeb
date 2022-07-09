@@ -10,7 +10,7 @@ const MemoBox = styled.textarea`
   resize: none;
   width: 400px;
   height: 400px;
-  background-color: rgb(187, 217, 141);
+  background-color: ${(props) => props.backgroundColor};
 
   text-align: center;
 
@@ -19,7 +19,7 @@ const MemoBox = styled.textarea`
   
   animation-name: fade;
   animation-duration: 1.0s;
-  
+
   font-size: ${(props) => props.fontSize || "16px"};
 `
 

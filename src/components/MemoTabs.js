@@ -1,12 +1,16 @@
 import styled from "styled-components";
+import { useState } from "react";
+import { get_randomColor, push_localStorageArr, set_localStorageArr_element } from "../functions";
 
-const MemoTab = styled.div`
-  background-color: ${(props) => props.backgroundColor || "lightgreen"};
+const MemoTab = styled.textarea`
+  background-color: ${(props) => props.backgroundColor};
   width: 100%;
   height: 60px;
+  resize: none;
   line-height: 60px;
   
   margin: 10px auto;
+  border: 0;
 
   text-align: center;
   font-size: 16px;
@@ -16,12 +20,34 @@ const MemoTab = styled.div`
   animation-duration: 1.0s;
 `
 
-function MemoTabs(){
+function MemoTabs({memoTab_index}){
+
+    let [memoTabArr, set_memoTabArr] = useState(JSON.parse(localStorage.getItem("memoTabs")));
     return (
         <>
           <div className="memoTab-box">
-            <MemoTab>탭임</MemoTab>
-            <MemoTab>탭임2</MemoTab>
+            {
+              memoTabArr.map((element, i)=>{
+                  return (
+                    <MemoTab defaultValue={
+                          JSON.parse(localStorage.getItem("memoTab_titles"))[i]
+                      }
+                      onChange={(e)=>{
+                        set_localStorageArr_element("memoTab_titles", i, e.target.value);
+                      }}
+                      placeholder='타이틀을 입력하세요'
+                      key={i} backgroundColor={element}
+                      />
+                  )
+              })
+
+            }
+            <button className="memoTab-add-btn" onClick={()=>{
+              push_localStorageArr("memoTabs", get_randomColor());
+              set_memoTabArr(JSON.parse(localStorage.getItem("memoTabs")));
+              
+              push_localStorageArr("memoTab_titles", "");
+            }}>+</button>
           </div>
         </>
     )
