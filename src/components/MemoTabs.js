@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { get_randomColor, push_localStorageArr, set_localStorageArr_element } from "../functions";
+import { get_randomColor, push_localStorageArr, change_localStorageArr_element } from "../functions";
 
 const MemoTab = styled.textarea`
   background-color: ${(props) => props.backgroundColor};
@@ -29,15 +29,16 @@ function MemoTabs({memoTab_index}){
             {
               memoTabArr.map((element, i)=>{
                   return (
-                    <MemoTab defaultValue={
+                    <MemoTab 
+                      defaultValue={
                           JSON.parse(localStorage.getItem("memoTab_titles"))[i]
                       }
                       onChange={(e)=>{
-                        set_localStorageArr_element("memoTab_titles", i, e.target.value);
+                        change_localStorageArr_element("memoTab_titles", i, e.target.value);
                       }}
                       placeholder='타이틀을 입력하세요'
                       key={i} backgroundColor={element}
-                      />
+                    />
                   )
               })
 
@@ -47,6 +48,7 @@ function MemoTabs({memoTab_index}){
               set_memoTabArr(JSON.parse(localStorage.getItem("memoTabs")));
               
               push_localStorageArr("memoTab_titles", "");
+              push_localStorageArr("memo_contents", "");
             }}>+</button>
           </div>
         </>

@@ -11,7 +11,7 @@ export function get_randomColor(){
     원하는 값을 담는다.
                             ex) func("memoValueArr", 3, "안녕하세요");
 */
-export function set_localStorageArr_element(valueName, index, content){
+export function change_localStorageArr_element(valueName, index, content){
     let copy = JSON.parse(localStorage.getItem(valueName));
     copy[index] = content;
     copy = JSON.stringify(copy);
@@ -23,4 +23,10 @@ export function push_localStorageArr(valueName, content){
     copy.push(content);
     copy = JSON.stringify(copy);
     localStorage.setItem(valueName, copy);
+}
+
+export function set_defaultValue_localStorage(valueName, content){
+    if(localStorage.getItem(valueName) == null){
+        localStorage.setItem(valueName, JSON.stringify(content));
+    }
 }
